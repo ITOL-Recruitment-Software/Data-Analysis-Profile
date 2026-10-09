@@ -1,3 +1,4 @@
+<!--start-->
 <h1 align="center">Hi there 👋 I'm a Data Analyst</h1>
 <h3 align="center">Turning raw data into decisions that matter</h3>
 <p align="center">
