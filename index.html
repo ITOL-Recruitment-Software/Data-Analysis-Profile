@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Analyst Profile</title>
+  <meta name="description" content="A data analyst profile, rendered live from the repository README.">
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text: #1b2733;
+      --muted: #5b6b7b;
+      --border: #dde4ec;
+      --accent: #007acc;
+      --accent-soft: #e6f3fb;
+      --code-bg: #f0f4f8;
+      --shadow: 0 1px 2px rgba(16, 32, 48, .06), 0 8px 24px rgba(16, 32, 48, .06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0e141b;
+        --surface: #151d27;
+        --text: #e4eaf1;
+        --muted: #8fa0b2;
+        --border: #263344;
+        --accent: #4db3f0;
+        --accent-soft: #14283a;
+        --code-bg: #1b2634;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0e141b;
+      --surface: #151d27;
+      --text: #e4eaf1;
+      --muted: #8fa0b2;
+      --border: #263344;
+      --accent: #4db3f0;
+      --accent-soft: #14283a;
+      --code-bg: #1b2634;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.7 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1100px; margin: 0 auto; padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .brand { font-weight: 700; letter-spacing: -.01em; margin-right: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .btn {
+      appearance: none; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      padding: 6px 12px; border-radius: 8px; font: inherit; font-size: 14px; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Layout */
+    .layout {
+      max-width: 1100px; margin: 0 auto; padding: 28px 16px 64px;
+      display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; align-items: start;
+    }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: minmax(0, 1fr); }
+      .toc { display: none; }
+    }
+
+    /* Table of contents */
+    .toc { position: sticky; top: 76px; font-size: 14px; }
+    .toc h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 8px; }
+    .toc ul { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--border); }
+    .toc a {
+      display: block; padding: 4px 12px; margin-left: -2px; border-left: 2px solid transparent;
+      color: var(--muted); text-decoration: none;
+    }
+    .toc a:hover { color: var(--text); }
+    .toc a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+
+    /* Content card */
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      box-shadow: var(--shadow); padding: clamp(20px, 4vw, 44px);
+    }
+
+    /* Rendered markdown */
+    .md > :first-child { margin-top: 0; }
+    .md > :last-child { margin-bottom: 0; }
+    .md h1 { font-size: clamp(1.9rem, 4.5vw, 2.6rem); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 .4em; }
+    .md h2 { font-size: 1.5rem; margin: 2.2em 0 .7em; padding-bottom: .35em; border-bottom: 1px solid var(--border); letter-spacing: -.01em; }
+    .md h3 { font-size: 1.15rem; margin: 1.6em 0 .5em; }
+    .md h1 + h3 { color: var(--muted); font-weight: 500; font-size: 1.2rem; margin-top: 0; }
+    .md p { margin: .9em 0; }
+    .md a { color: var(--accent); text-decoration: none; }
+    .md a:hover { text-decoration: underline; }
+    .md ul, .md ol { padding-left: 1.4em; }
+    .md li { margin: .3em 0; }
+    .md img { max-width: 100%; height: auto; vertical-align: middle; }
+    .md p > a > img, .md p > img { margin: 3px 2px; }
+    .md blockquote {
+      margin: 1.2em 0; padding: .6em 1.1em; color: var(--muted);
+      background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+    }
+    .md blockquote > :first-child { margin-top: 0; }
+    .md blockquote > :last-child { margin-bottom: 0; }
+    .md code {
+      background: var(--code-bg); padding: .15em .4em; border-radius: 6px;
+      font: .88em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .md pre { background: var(--code-bg); padding: 14px 16px; border-radius: 10px; overflow-x: auto; }
+    .md pre code { background: none; padding: 0; }
+    .md hr { border: 0; border-top: 1px solid var(--border); margin: 2em 0; }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; border: 1px solid var(--border); border-radius: 12px; }
+    .md table { border-collapse: collapse; width: 100%; font-size: .95em; }
+    .md th, .md td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+    .md th { background: var(--code-bg); font-weight: 600; white-space: nowrap; }
+    .md tr:last-child td { border-bottom: 0; }
+
+    /* States */
+    .state { text-align: center; color: var(--muted); padding: 48px 0; }
+    .spinner {
+      width: 28px; height: 28px; margin: 0 auto 14px; border-radius: 50%;
+      border: 3px solid var(--border); border-top-color: var(--accent); animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } html { scroll-behavior: auto; } }
+
+    footer { text-align: center; color: var(--muted); font-size: 14px; padding: 0 16px 40px; }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="brand" id="brand">Data Analyst Profile</span>
+      <a class="btn" id="repoLink" href="#" target="_blank" rel="noopener">View on GitHub</a>
+      <button class="btn" id="themeBtn" type="button" aria-label="Toggle colour theme">Theme</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" id="toc" aria-label="On this page" hidden>
+      <h2>On this page</h2>
+      <ul id="tocList"></ul>
+    </nav>
+
+    <main>
+      <article class="card">
+        <div class="state" id="state">
+          <div class="spinner"></div>
+          Loading README…
+        </div>
+        <div class="md" id="content" hidden></div>
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    Rendered live from <a id="footerReadme" href="#" target="_blank" rel="noopener">README.md</a>.
+    Edit the README and redeploy to update this page.
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script>
+    // ---- Configuration ------------------------------------------------------
+    const REPO = "ITOL-Recruitment-Software/Data-Analysis-Profile";
+    const BRANCH = "main";
+    const README_PATHS = [
+      "./README.md",  // deployed alongside this page by the workflow
+      `https://raw.githubusercontent.com/${REPO}/${BRANCH}/README.md` // fallback, e.g. when opened from disk
+    ];
+    // -------------------------------------------------------------------------
+
+    const $ = (id) => document.getElementById(id);
+    const repoUrl = `https://github.com/${REPO}`;
+    $("repoLink").href = repoUrl;
+    $("footerReadme").href = `${repoUrl}/blob/${BRANCH}/README.md`;
+
+    // Theme toggle (remembered per browser, optional)
+    const root = document.documentElement;
+    try {
+      const saved = localStorage.getItem("theme");
+      if (saved) root.setAttribute("data-theme", saved);
+    } catch (e) {}
+    $("themeBtn").addEventListener("click", () => {
+      const isDark = root.getAttribute("data-theme") === "dark" ||
+        (!root.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+      const next = isDark ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+
+    async function loadReadme() {
+      let lastError;
+      for (const path of README_PATHS) {
+        try {
+          const res = await fetch(path, { cache: "no-cache" });
+          if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
+          return await res.text();
+        } catch (err) { lastError = err; }
+      }
+      throw lastError;
+    }
+
+    function slugify(text, used) {
+      let base = text.toLowerCase().trim()
+        .replace(/[^\p{L}\p{N}\s-]/gu, "")
+        .replace(/\s+/g, "-") || "section";
+      let slug = base, n = 1;
+      while (used.has(slug)) slug = `${base}-${n++}`;
+      used.add(slug);
+      return slug;
+    }
+
+    function enhance(container) {
+      // Heading anchors
+      const used = new Set();
+      const headings = [...container.querySelectorAll("h2")];
+      container.querySelectorAll("h1, h2, h3, h4").forEach(h => { h.id = slugify(h.textContent, used); });
+
+      // Wrap tables so they scroll on small screens
+      container.querySelectorAll("table").forEach(t => {
+        const wrap = document.createElement("div");
+        wrap.className = "table-wrap";
+        t.parentNode.insertBefore(wrap, t);
+        wrap.appendChild(t);
+      });
+
+      // External links open in a new tab
+      container.querySelectorAll("a[href]").forEach(a => {
+        const href = a.getAttribute("href");
+        if (/^https?:\/\//i.test(href)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+      });
+
+      // Images from relative paths resolve against the repo
+      container.querySelectorAll("img[src]").forEach(img => {
+        const src = img.getAttribute("src");
+        if (!/^(https?:|data:|\/\/)/i.test(src)) {
+          img.src = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${src.replace(/^\.?\//, "")}`;
+        }
+        img.loading = "lazy";
+      });
+
+      return headings;
+    }
+
+    function buildToc(headings) {
+      if (headings.length < 2) return;
+      const list = $("tocList");
+      headings.forEach(h => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `#${h.id}`;
+        a.textContent = h.textContent;
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      $("toc").hidden = false;
+
+      const links = [...list.querySelectorAll("a")];
+      const byId = new Map(links.map(a => [a.getAttribute("href").slice(1), a]));
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            links.forEach(l => l.classList.remove("active"));
+            byId.get(e.target.id)?.classList.add("active");
+          }
+        });
+      }, { rootMargin: "-80px 0px -70% 0px" });
+      headings.forEach(h => observer.observe(h));
+    }
+
+    (async function init() {
+      try {
+        const markdown = await loadReadme();
+        marked.setOptions({ gfm: true, breaks: false });
+        const html = DOMPurify.sanitize(marked.parse(markdown), { ADD_ATTR: ["target"] });
+        const content = $("content");
+        content.innerHTML = html;
+        const headings = enhance(content);
+        buildToc(headings);
+
+        const title = content.querySelector("h1")?.textContent.trim();
+        if (title) {
+          document.title = title;
+          $("brand").textContent = title;
+        }
+        $("state").hidden = true;
+        content.hidden = false;
+      } catch (err) {
+        console.error(err);
+        $("state").innerHTML =
+          `Couldn't load the README.<br><small>${String(err.message).replace(/</g, "&lt;")}</small><br><br>` +
+          `<a class="btn" href="${repoUrl}">Open the repository</a>`;
+      }
+    })();
+  </script>
+</body>
+</html>
